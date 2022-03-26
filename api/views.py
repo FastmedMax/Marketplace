@@ -8,3 +8,11 @@ from .serializers import UserSerializer, ProductSerializer, ProductRateSerialize
 
 
 # Create your views here.
+class ProductViewSet(viewsets.GenericViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def list(self, request):
+        products = self.queryset.values_list("title", "description", "short_description", "image", "downloads", "file")
+        return Response(products, status=status.HTTP_200_OK)
+

@@ -19,3 +19,9 @@ class ProductRateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductRate
         fields = "__all__"
+
+
+class UserProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProduct
+        fields = "__all__"

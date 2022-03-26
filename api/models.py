@@ -34,3 +34,19 @@ class Product(models.Model):
     price = models.FloatField(verbose_name="Цена")
     is_free = models.BooleanField(verbose_name="Бесплатно ли")
 
+
+class ProductRate(models.Model):
+    product = models.ForeignKey(
+        Product,
+        verbose_name="Продукт",
+        on_delete=models.CASCADE,
+        related_name="rates"
+        )
+    user = models.ForeignKey(
+        User,
+        verbose_name="Пользователь",
+        on_delete=models.CASCADE
+    )
+    comment = models.TextField(verbose_name="Комментарий")
+    rate = models.PositiveIntegerField(verbose_name="Оценка", validators=[validators.MaxValueValidator(10)])
+

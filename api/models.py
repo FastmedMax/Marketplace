@@ -50,3 +50,15 @@ class ProductRate(models.Model):
     comment = models.TextField(verbose_name="Комментарий")
     rate = models.PositiveIntegerField(verbose_name="Оценка", validators=[validators.MaxValueValidator(10)])
 
+
+class UserProduct(models.Model):
+    product = models.ForeignKey(
+        Product,
+        verbose_name="Продукт",
+        on_delete=models.CASCADE
+        )
+    user = models.ForeignKey(
+        User,
+        verbose_name="Пользователь",
+        on_delete=models.CASCADE
+    )

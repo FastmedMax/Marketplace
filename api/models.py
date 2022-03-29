@@ -29,6 +29,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name="Описание")
     short_description = models.CharField(verbose_name="Короткое описание", max_length=100)
     image = models.ImageField(verbose_name="Картинка", blank=True)
+    file = models.FileField(verbose_name="Файл", blank=True)
     is_free = models.BooleanField(verbose_name="Бесплатно ли")
 
 

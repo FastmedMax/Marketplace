@@ -30,15 +30,13 @@ class ProductViewSet(viewsets.GenericViewSet):
             serializer = self.serializer_class(product.rates, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-class ProductRateViewSet(viewsets.GenericViewSet):
-    queryset = ProductRate
-    serializer_class = ProductRateSerializer
+        elif request.method == "POST":
+            data = request.data.copy()
+            data["product"] = pk
+            serializer = self.serializer_class(data=data)
 
-    def create(self, request):
-        serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid(raise_exception=False):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        if serializer.is_valid(raise_exception=False):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

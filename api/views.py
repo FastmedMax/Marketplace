@@ -20,8 +20,8 @@ class ProductViewSet(viewsets.GenericViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def list(self, request):
-        products = self.queryset.values_list("title", "description", "short_description", "image", "downloads", "file")
-        return Response(products, status=status.HTTP_200_OK)
+        serializer = self.serializer_class(self.queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ProductRateViewSet(viewsets.GenericViewSet):

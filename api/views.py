@@ -14,6 +14,11 @@ class ProductViewSet(viewsets.GenericViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+    def retrieve(self, request, pk=None):
+        product = self.get_object()
+        serializer = self.serializer_class(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def list(self, request):
         products = self.queryset.values_list("title", "description", "short_description", "image", "downloads", "file")
         return Response(products, status=status.HTTP_200_OK)

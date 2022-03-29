@@ -23,6 +23,12 @@ class ProductViewSet(viewsets.GenericViewSet):
         serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=["get", "post"], url_name="rates", url_path="rates", serializer_class=ProductRateSerializer)
+    def rates(self, request, pk=None):
+        if request.method == "GET":
+            product = self.queryset.get(id=pk)
+            serializer = self.serializer_class(product.rates, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ProductRateViewSet(viewsets.GenericViewSet):
     queryset = ProductRate

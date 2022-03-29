@@ -47,7 +47,7 @@ class ProductRate(models.Model):
         verbose_name="Пользователь",
         on_delete=models.CASCADE
     )
-    comment = models.TextField(verbose_name="Комментарий")
+    comment = models.TextField(verbose_name="Комментарий", blank=True)
     rate = models.PositiveIntegerField(verbose_name="Оценка", validators=[validators.MaxValueValidator(10)])
 
 

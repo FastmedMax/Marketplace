@@ -30,6 +30,8 @@ class Product(models.Model):
     short_description = models.CharField(verbose_name="Короткое описание", max_length=100)
     image = models.ImageField(verbose_name="Картинка", blank=True)
     file = models.FileField(verbose_name="Файл", blank=True)
+    downloads = models.PositiveBigIntegerField(verbose_name="Скачивания", default=0)
+    price = models.FloatField(verbose_name="Цена", blank=True)
     is_free = models.BooleanField(verbose_name="Бесплатно ли")
 
 

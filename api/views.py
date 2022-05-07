@@ -1,12 +1,11 @@
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 
-from .models import User, Product, ProductRate, UserProduct
+from .models import Product
 
-from .serializers import UserSerializer, ProductSerializer, ProductRateSerializer, UserProductSerializer
+from .serializers import ProductSerializer, ProductRateSerializer
 
 
 # Create your views here.

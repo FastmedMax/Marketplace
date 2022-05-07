@@ -38,12 +38,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # General
 APPEND_SLASH = True
-LANGUAGE_CODE = "ru"
+LANGUAGE_CODE = "ru-RU"
 LOGIN_REDIRECT_URL = "/"
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
+USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True

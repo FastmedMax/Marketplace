@@ -65,3 +65,6 @@ class UserProduct(models.Model):
         verbose_name="Пользователь",
         on_delete=models.CASCADE
     )
+
+    class Meta:
+        unique_together = ("product", "user")

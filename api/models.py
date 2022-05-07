@@ -31,7 +31,7 @@ class Product(models.Model):
     image = models.ImageField(verbose_name="Картинка", blank=True)
     file = models.FileField(verbose_name="Файл", blank=True)
     downloads = models.PositiveBigIntegerField(verbose_name="Скачивания", default=0)
-    price = models.FloatField(verbose_name="Цена", blank=True)
+    price = models.FloatField(verbose_name="Цена", blank=True, null=True)
     is_free = models.BooleanField(verbose_name="Бесплатно ли")
 
 

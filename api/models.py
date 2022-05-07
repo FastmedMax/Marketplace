@@ -50,6 +50,9 @@ class ProductRate(models.Model):
     comment = models.TextField(verbose_name="Комментарий", blank=True)
     rate = models.PositiveIntegerField(verbose_name="Оценка", validators=[validators.MaxValueValidator(10)])
 
+    class Meta:
+        unique_together = ("product", "user")
+
 
 class UserProduct(models.Model):
     product = models.ForeignKey(

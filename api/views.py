@@ -6,7 +6,7 @@ from rest_framework import permissions
 
 from .models import Product
 
-from .serializers import ProductSerializer, ProductRateSerializer
+from .serializers import ProductSerializer, ProductRateSerializer, UserProductSerializer
 
 
 # Create your views here.
@@ -41,3 +41,18 @@ class ProductViewSet(viewsets.GenericViewSet):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=["post"], url_name="buy", url_path="buy", serializer_class=UserProductSerializer)
+    def buy(self, request, pk=None):
+        product = self.get_object()
+        data = request.data.copy()
+        data["user"] = request.user.id
+        data["product"] = product.id
+
+        serializer = self.serializer_class(data=data)
+
+        if serializer.is_valid(raise_exception=False):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

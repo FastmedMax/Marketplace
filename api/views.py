@@ -33,6 +33,7 @@ class ProductViewSet(viewsets.GenericViewSet):
 
         elif request.method == "POST":
             data = request.data.copy()
+            data["user"] = request.user.id
             data["product"] = pk
             serializer = self.serializer_class(data=data)
 

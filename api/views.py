@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework import permissions
 
 from .models import Product
 
@@ -12,6 +13,7 @@ from .serializers import ProductSerializer, ProductRateSerializer
 class ProductViewSet(viewsets.GenericViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classe = (permissions.IsAuthenticated)
 
     def retrieve(self, request, pk=None):
         product = self.get_object()

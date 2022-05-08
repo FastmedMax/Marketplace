@@ -1,0 +1,384 @@
+swagger: '2.0'
+info:
+  title: Marketplace Api
+  version: v1
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+  - Basic: []
+paths:
+  /auth/token/login/:
+    post:
+      operationId: auth_token_login_create
+      description: Use this endpoint to obtain user authentication token.
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TokenCreate'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TokenCreate'
+      tags:
+        - auth
+    parameters: []
+  /auth/token/logout/:
+    post:
+      operationId: auth_token_logout_create
+      description: Use this endpoint to logout user (remove user authentication token).
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+        - auth
+    parameters: []
+  /auth/users/:
+    get:
+      operationId: GetUsersList
+      description: "Получение списка пользователей"
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      tags:
+        - auth
+    post:
+      operationId: CreateUser
+      description: "Создание пользователя"
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserCreate'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/UserCreate'
+      tags:
+        - auth
+    parameters: []
+  /auth/users/me/:
+    get:
+      operationId: auth_users_me_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      tags:
+        - auth
+    put:
+      operationId: auth_users_me_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - auth
+    patch:
+      operationId: auth_users_me_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - auth
+    delete:
+      operationId: auth_users_me_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - auth
+    parameters: []
+  /auth/users/{id}/:
+    get:
+      operationId: GetUser
+      description: "Получение пользователя с указанным `id`"
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - auth
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this пользователь."
+        required: true
+        type: integer
+  /products/:
+    get:
+      operationId: GetListProduct
+      description: "Получение списка всех продуктов"
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+      tags:
+        - products
+    parameters: []
+  /products/{id}/:
+    get:
+      operationId: GetProduct
+      description: "Получение продукта по id"
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Product'
+      tags:
+        - products
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this product.
+        required: true
+        type: integer
+  /products/{id}/buy/:
+    post:
+      operationId: BuyProduct
+      description: "Покупка продукта"
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserProduct'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/UserProduct'
+      tags:
+        - products
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this product.
+        required: true
+        type: integer
+  /products/{id}/rates/:
+    get:
+      operationId: GetProductRates
+      description: "Получение оценок по товару"
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductRate'
+      tags:
+        - products
+    post:
+      operationId: PostProductRates
+      description: "Добавление оценки по товару"
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+              rate:
+                type: integer
+                minimum: 0
+                maximum: 10
+            required:
+              - rate
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductRate'
+      tags:
+        - products
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this product.
+        required: true
+        type: integer
+definitions:
+  TokenCreate:
+    type: object
+    properties:
+      password:
+        title: Password
+        type: string
+        minLength: 1
+      email:
+        title: Email
+        type: string
+        minLength: 1
+  User:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      email:
+        title: "Почта"
+        type: string
+        format: email
+        readOnly: true
+        minLength: 1
+  UserCreate:
+    required:
+      - email
+      - password
+    type: object
+    properties:
+      email:
+        title: "Почта"
+        type: string
+        format: email
+        maxLength: 254
+        minLength: 1
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      password:
+        title: Password
+        type: string
+        minLength: 1
+  Product:
+    required:
+      - title
+      - description
+      - short_description
+      - is_free
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      title:
+        title: "Название"
+        type: string
+        maxLength: 60
+        minLength: 1
+      description:
+        title: "Описание"
+        type: string
+        minLength: 1
+      short_description:
+        title: "Короткое описание"
+        type: string
+        maxLength: 100
+        minLength: 1
+      image:
+        title: "Картинка"
+        type: string
+        readOnly: true
+        format: uri
+      file:
+        title: "Файл"
+        type: string
+        readOnly: true
+        format: uri
+      downloads:
+        title: "Скачивания"
+        type: integer
+        maximum: 9223372036854775807
+        minimum: 0
+      price:
+        title: "Цена"
+        type: number
+        x-nullable: true
+      is_free:
+        title: "Бесплатно ли"
+        type: boolean
+  UserProduct:
+    required:
+      - product
+      - user
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      product:
+        title: "Продукт"
+        type: integer
+      user:
+        title: "Пользователь"
+        type: integer
+  ProductRate:
+    required:
+      - rate
+      - product
+      - user
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      comment:
+        title: "Комментарий"
+        type: string
+      rate:
+        title: "Оценка"
+        type: integer
+        maximum: 10
+        minimum: 0
+      product:
+        title: "Продукт"
+        type: integer
+      user:
+        title: "Пользователь"
+        type: integer

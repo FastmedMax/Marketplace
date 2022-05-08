@@ -22,11 +22,17 @@ class ProductViewSet(viewsets.GenericViewSet):
     permission_classe = (permissions.IsAuthenticated)
 
     def retrieve(self, request, pk=None):
+        """
+        Получение продукта по id
+        """
         product = self.get_object()
         serializer = self.serializer_class(product)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def list(self, request):
+        """
+        Получение списка всех продуктов
+        """
         serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -51,6 +57,9 @@ class ProductViewSet(viewsets.GenericViewSet):
 
     @action(detail=True, methods=["post"], url_name="buy", url_path="buy", serializer_class=UserProductSerializer)
     def buy(self, request, pk=None):
+        """
+        Покупка продукта
+        """
         product = self.get_object()
         data = request.data.copy()
         data["user"] = request.user.id

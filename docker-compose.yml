@@ -23,6 +23,8 @@ services:
     volumes:
       - static_volume:/app/web/staticfiles
       - media_volume:/app/web/mediafiles
+      - ./docs/openapi-schema.yml:/app/web/docs/openapi-schema.yml
+      - ./docs/redoc.html:/app/web/docs/redoc.html
     ports:
       - 8000:80
     depends_on:

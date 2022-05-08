@@ -1,8 +1,14 @@
+from django.utils.decorators import method_decorator
+
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import permissions
+
+from drf_yasg.utils import swagger_auto_schema
+
+from djoser.views import UserViewSet as DjoserUserViewSet
 
 from .models import Product
 

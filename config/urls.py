@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 from rest_framework.routers import DefaultRouter
 
@@ -25,7 +26,10 @@ urlpatterns = [
     path("api/auth/", include('djoser.urls.authtoken')),
     path(
         "redoc/",
-        login_required(schema_view.with_ui("redoc", cache_timeout=0)),
-        name="schema-redoc",
-    ),
+        login_required(
+            TemplateView.as_view(
+                template_name="redoc.html",
+            )
+        )
+    )
 ]

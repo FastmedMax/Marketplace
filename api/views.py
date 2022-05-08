@@ -16,6 +16,53 @@ from .serializers import ProductSerializer, ProductRateSerializer, UserProductSe
 
 
 # Create your views here.
+@method_decorator(
+    name="retrieve",
+    decorator=swagger_auto_schema(
+        operation_id="GetUser",
+        operation_description="Получение пользователя с указанным `id`",
+    ),
+)
+@method_decorator(
+    name="list",
+    decorator=swagger_auto_schema(
+        operation_id="GetUsersList",
+        operation_description="Получение списка пользователей",
+    ),
+)
+@method_decorator(
+    name="create",
+    decorator=swagger_auto_schema(
+        operation_id="CreateUser", operation_description="Создание пользователя"
+    ),
+)
+@method_decorator(name="destroy", decorator=swagger_auto_schema(auto_schema=None))
+@method_decorator(name="update", decorator=swagger_auto_schema(auto_schema=None))
+@method_decorator(
+    name="partial_update", decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(name="set_password", decorator=swagger_auto_schema(auto_schema=None))
+@method_decorator(name="set_username", decorator=swagger_auto_schema(auto_schema=None))
+@method_decorator(name="activation", decorator=swagger_auto_schema(auto_schema=None))
+@method_decorator(
+    name="resend_activation", decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="reset_username", decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="reset_password", decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="reset_password_confirm", decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="reset_username_confirm", decorator=swagger_auto_schema(auto_schema=None)
+)
+class UserViewSet(DjoserUserViewSet):
+    pass
+
+
 class ProductViewSet(viewsets.GenericViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

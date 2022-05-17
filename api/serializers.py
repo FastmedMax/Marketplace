@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User, Product, ProductRate, UserProduct
+from .models import User, Category, Product, ProductRate, UserProduct
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,6 +16,9 @@ class ProductRateSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        slug_field="title", queryset=Category.objects.all()
+    )
     class Meta:
         model = Product
         fields = "__all__"

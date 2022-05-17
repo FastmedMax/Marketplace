@@ -65,7 +65,8 @@ class ProductViewSet(viewsets.GenericViewSet):
         methods=["post"],
         url_name="buy",
         url_path="buy",
-        serializer_class=UserProductSerializer
+        serializer_class=UserProductSerializer,
+        permission_classes=(permissions.IsAuthenticated)
     )
     def buy(self, request, pk=None):
         """

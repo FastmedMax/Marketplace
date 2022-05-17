@@ -58,6 +58,7 @@ class ProductRate(models.Model):
     )
     comment = models.TextField(verbose_name="Комментарий", blank=True)
     rate = models.PositiveIntegerField(verbose_name="Оценка", validators=[validators.MaxValueValidator(10)])
+    created_at = models.DateTimeField(verbose_name="Дата добавления", auto_now=True)
 
     class Meta:
         unique_together = ("product", "user")

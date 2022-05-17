@@ -108,4 +108,6 @@ class UserProduct(models.Model):
     )
 
     class Meta:
+        verbose_name = "Приобретенный продукт"
+        verbose_name_plural = "Приобретеннные продукты"
         unique_together = ("product", "user")

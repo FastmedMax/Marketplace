@@ -10,6 +10,7 @@ class UserProductAdminInline(admin.StackedInline):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
+    inlines = (UserProductAdminInline,)
     exclude = (
         "password", "groups", "is_active",
         "is_staff", "is_superuser", "last_login",

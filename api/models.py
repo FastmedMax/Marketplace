@@ -23,6 +23,9 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+class Category(models.Model):
+    title = models.CharField(verbose_name="Название", max_length=255)
+
 
 class Product(models.Model):
     title = models.CharField(verbose_name="Название", max_length=60)

@@ -9,15 +9,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = "__all__"
-
-
 class ProductRateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductRate
+        fields = "__all__"
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
         fields = "__all__"
 
 

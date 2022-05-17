@@ -37,29 +37,23 @@ class ProductViewSet(viewsets.GenericViewSet):
 
     @action(
         detail=True,
-        methods=["get", "post"],
+        methods=["post"],
         url_name="rates",
         url_path="rates",
         serializer_class=ProductRateSerializer,
         permission_classes=(permissions.IsAuthenticated)
     )
     def rates(self, request, pk=None):
-        if request.method == "GET":
-            product = self.get_object()
-            serializer = self.serializer_class(product.rates, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        data = request.data.copy()
+        data["user"] = request.user.id
+        data["product"] = pk
+        serializer = self.serializer_class(data=data)
 
-        elif request.method == "POST":
-            data = request.data.copy()
-            data["user"] = request.user.id
-            data["product"] = pk
-            serializer = self.serializer_class(data=data)
+        if serializer.is_valid(raise_exception=False):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-            if serializer.is_valid(raise_exception=False):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(
         detail=True,

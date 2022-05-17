@@ -57,7 +57,10 @@ class ProductRate(models.Model):
         on_delete=models.CASCADE
     )
     comment = models.TextField(verbose_name="Комментарий", blank=True)
-    rate = models.PositiveIntegerField(verbose_name="Оценка", validators=[validators.MaxValueValidator(10)])
+    rate = models.PositiveIntegerField(
+        verbose_name="Оценка",
+        validators=[validators.MaxValueValidator(5)]
+    )
     created_at = models.DateTimeField(verbose_name="Дата добавления", auto_now=True)
 
     class Meta:

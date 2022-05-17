@@ -28,6 +28,10 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    class OSTypes(models.TextChoices):
+        MOBILE = "MOBILE", "Мобильная"
+        DESKTOP = "DESKTOP", "Настольная"
+
     title = models.CharField(verbose_name="Название", max_length=60)
     description = models.TextField(verbose_name="Описание")
     category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)

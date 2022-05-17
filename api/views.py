@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
@@ -79,3 +80,16 @@ class ProductViewSet(viewsets.GenericViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        detail=False,
+        methods=["post"],
+        url_name="check_cart",
+        url_path="check_cart",
+        permission_classes=(permissions.IsAuthenticated)
+    )
+    def check_cart(self, request):
+        ids = request.data["ids"]
+        sum = self.queryset.filter(id__in=ids).aggregate(Sum("price"))["price__sum"]
+
+        return Response({"sum": sum}, status=status.HTTP_200_OK)

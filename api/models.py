@@ -44,6 +44,11 @@ class Product(models.Model):
     os_type = models.CharField(verbose_name="Тип платформы", choices=OSTypes.choices)
 
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, related_name="images", on_delete=models.CASCADE)
+    image = models.ImageField()
+
+
 class ProductRate(models.Model):
     product = models.ForeignKey(
         Product,

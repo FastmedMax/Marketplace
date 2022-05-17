@@ -19,7 +19,6 @@ class UserViewSet(DjoserUserViewSet):
 class ProductViewSet(viewsets.GenericViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classe = (permissions.IsAuthenticated)
 
     def retrieve(self, request, pk=None):
         """

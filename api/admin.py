@@ -15,4 +15,4 @@ class UserAdmin(admin.ModelAdmin):
         "password", "groups", "is_active",
         "is_staff", "is_superuser", "last_login",
         "date_joined", "user_permissions"
-        )
+    )

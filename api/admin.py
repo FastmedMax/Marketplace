@@ -15,3 +15,8 @@ class UserAdmin(admin.ModelAdmin):
         "is_staff", "is_superuser", "last_login",
         "date_joined", "user_permissions"
     )
+
+
+class ProductRateAdminInline(admin.StackedInline):
+    model = ProductRate
+    classes = ["collapse"]

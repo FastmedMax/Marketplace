@@ -40,7 +40,8 @@ class ProductViewSet(viewsets.GenericViewSet):
         methods=["get", "post"],
         url_name="rates",
         url_path="rates",
-        serializer_class=ProductRateSerializer
+        serializer_class=ProductRateSerializer,
+        permission_classes=(permissions.IsAuthenticated)
     )
     def rates(self, request, pk=None):
         if request.method == "GET":

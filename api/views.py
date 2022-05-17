@@ -35,7 +35,13 @@ class ProductViewSet(viewsets.GenericViewSet):
         serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=["get", "post"], url_name="rates", url_path="rates", serializer_class=ProductRateSerializer)
+    @action(
+        detail=True,
+        methods=["get", "post"],
+        url_name="rates",
+        url_path="rates",
+        serializer_class=ProductRateSerializer
+    )
     def rates(self, request, pk=None):
         if request.method == "GET":
             product = self.get_object()
@@ -54,7 +60,13 @@ class ProductViewSet(viewsets.GenericViewSet):
 
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, methods=["post"], url_name="buy", url_path="buy", serializer_class=UserProductSerializer)
+    @action(
+        detail=True,
+        methods=["post"],
+        url_name="buy",
+        url_path="buy",
+        serializer_class=UserProductSerializer
+    )
     def buy(self, request, pk=None):
         """
         Покупка продукта

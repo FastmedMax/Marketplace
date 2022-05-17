@@ -30,6 +30,9 @@ class Category(models.Model):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Product(models.Model):
     class OSTypes(models.TextChoices):

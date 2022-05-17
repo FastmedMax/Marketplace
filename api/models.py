@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 from django.core import validators
 from django.contrib.auth.models import AbstractUser
 
@@ -48,6 +48,9 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name="images", on_delete=models.CASCADE)
     image = models.ImageField()
 
+    @property
+    def image_url(self):
+        return self.image.url
 
 class ProductRate(models.Model):
     product = models.ForeignKey(

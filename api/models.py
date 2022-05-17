@@ -26,6 +26,10 @@ class User(AbstractUser):
 class Category(models.Model):
     title = models.CharField(verbose_name="Название", max_length=255)
 
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
 
 class Product(models.Model):
     class OSTypes(models.TextChoices):
@@ -43,6 +47,9 @@ class Product(models.Model):
     is_free = models.BooleanField(verbose_name="Бесплатно ли")
     os_type = models.CharField(verbose_name="Тип платформы", max_length=50, choices=OSTypes.choices)
 
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name="images", on_delete=models.CASCADE)
@@ -51,6 +58,11 @@ class ProductImage(models.Model):
     @property
     def image_url(self):
         return self.image.url
+
+    class Meta:
+        verbose_name = "Изображение продукта"
+        verbose_name_plural = "Изображения продукта"
+
 
 class ProductRate(models.Model):
     product = models.ForeignKey(
@@ -72,6 +84,8 @@ class ProductRate(models.Model):
     created_at = models.DateTimeField(verbose_name="Дата добавления", auto_now=True)
 
     class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
         unique_together = ("product", "user")
 
 

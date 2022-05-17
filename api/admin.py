@@ -3,12 +3,6 @@ from django.contrib import admin
 from .models import User, UserProduct, Product, ProductRate
 
 
-# Register your models here.
-admin.site.register(UserProduct)
-admin.site.register(Product)
-admin.site.register(ProductRate)
-
-
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     exclude = (

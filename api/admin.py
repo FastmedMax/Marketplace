@@ -29,3 +29,8 @@ class ProductRateAdminInline(admin.StackedInline):
 class ProductImageAdminInline(admin.StackedInline):
     model = ProductImage
     classes = ["collapse"]
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    inlines = (ProductRateAdminInline, ProductImageAdminInline)

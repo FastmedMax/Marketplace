@@ -41,7 +41,7 @@ class Product(models.Model):
     downloads = models.PositiveBigIntegerField(verbose_name="Скачивания", default=0)
     price = models.FloatField(verbose_name="Цена", blank=True, null=True)
     is_free = models.BooleanField(verbose_name="Бесплатно ли")
-    os_type = models.CharField(verbose_name="Тип платформы", choices=OSTypes.choices)
+    os_type = models.CharField(verbose_name="Тип платформы", max_length=50, choices=OSTypes.choices)
 
 
 class ProductImage(models.Model):

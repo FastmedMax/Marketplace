@@ -3,6 +3,9 @@ from django.contrib import admin
 from .models import User, Category, UserProduct, Product, ProductImage, ProductRate
 
 
+admin.site.register(Category)
+
+
 class UserProductAdminInline(admin.StackedInline):
     model = UserProduct
     classes = ["collapse"]

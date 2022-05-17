@@ -20,3 +20,8 @@ class UserAdmin(admin.ModelAdmin):
 class ProductRateAdminInline(admin.StackedInline):
     model = ProductRate
     classes = ["collapse"]
+
+
+class ProductImageAdminInline(admin.StackedInline):
+    model = ProductImage
+    classes = ["collapse"]

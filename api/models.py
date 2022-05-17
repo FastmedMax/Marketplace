@@ -54,6 +54,9 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
 
+    def __str__(self) -> str:
+        return self.title
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name="images", on_delete=models.CASCADE)
     image = models.ImageField()

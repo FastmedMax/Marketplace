@@ -16,6 +16,9 @@ class ProductRateSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    images = serializers.SlugRelatedField(
+        slug_field="image_url", read_only=True, many=True
+    )
     category = serializers.SlugRelatedField(
         slug_field="title", queryset=Category.objects.all()
     )

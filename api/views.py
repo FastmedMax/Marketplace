@@ -42,7 +42,7 @@ class ProductViewSet(viewsets.GenericViewSet):
         url_name="rates",
         url_path="rates",
         serializer_class=ProductRateSerializer,
-        permission_classes=(permissions.IsAuthenticated)
+        permission_classes=(permissions.IsAuthenticated,)
     )
     def rates(self, request, pk=None):
         data = request.data.copy()
@@ -62,7 +62,7 @@ class ProductViewSet(viewsets.GenericViewSet):
         url_name="buy",
         url_path="buy",
         serializer_class=UserProductSerializer,
-        permission_classes=(permissions.IsAuthenticated)
+        permission_classes=(permissions.IsAuthenticated,)
     )
     def buy(self, request, pk=None):
         """
@@ -86,7 +86,7 @@ class ProductViewSet(viewsets.GenericViewSet):
         methods=["post"],
         url_name="check_cart",
         url_path="check_cart",
-        permission_classes=(permissions.IsAuthenticated)
+        permission_classes=(permissions.IsAuthenticated,)
     )
     def check_cart(self, request):
         ids = request.data["ids"]
